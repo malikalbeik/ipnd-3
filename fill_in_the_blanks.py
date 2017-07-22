@@ -33,13 +33,15 @@ def difficulty_for_level(level):
     return 0 if level=="easy" else (1 if level=="medium" else 2)
 difficulty = difficulty_for_level(level)
 
+answers_number = len(answers[1]) if level=="easy" else (len(answers[2]) if level=="medium" else len(answers[2]))
+
 def start_game(attempts,sentences,answers,difficulty):
     """after choosing the level this function checks for the sentence needed for
     the right level and checks for the correct answers for that level.
     inputs:the attempts that the user sets, a list of the sentences for all the levels, and the answers list, the difficulty as an integer
     outputs:it doesn't have any specific thing to return but it works for the terminal and to check the answers"""
-    i = 0
-    while i < 4:
+    cycle_count = 0
+    while cycle_count < 4:
         if attempts == 0:
             print "Sorry, you lose!"
             sys.exit()
@@ -47,12 +49,12 @@ def start_game(attempts,sentences,answers,difficulty):
         while given_answer == "":
             print "you cant leave this field empty please write in the right answer."
             given_answer = raw_input(sentences[difficulty]).lower()
-        if given_answer == answers[difficulty][i]:
-            sentences[difficulty] = string.replace(sentences[difficulty], "__%d__" %(i+1) , given_answer)
+        if given_answer == answers[difficulty][cycle_count]:
+            sentences[difficulty] = string.replace(sentences[difficulty], "__%d__" %(cycle_count+1) , given_answer)
             print "Correct answer!"
-            if i == 3:
+            if cycle_count == answers_number-1 :
                 print "Congratulations you won :)"
-            i += 1
+            cycle_count += 1
         else:
             print "Wrong answer! Try again!"
             attempts -= 1
