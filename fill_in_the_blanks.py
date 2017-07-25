@@ -41,7 +41,7 @@ def start_game(attempts,sentences,answers,difficulty):
     inputs:the attempts that the user sets, a list of the sentences for all the levels, and the answers list, the difficulty as an integer
     outputs:it doesn't have any specific thing to return but it works for the terminal and to check the answers"""
     cycle_count = 0
-    while cycle_count < 4:
+    while cycle_count < answers_number:
         if attempts == 0:
             print "Sorry, you lose!"
             sys.exit()
@@ -56,7 +56,7 @@ def start_game(attempts,sentences,answers,difficulty):
                 print "Congratulations you won :)"
             cycle_count += 1
         else:
-            print "Wrong answer! Try again!"
-            attempts -= 1
+            print "Wrong answer! Try again! you have %d attempts left"%attempts
+
 
 start_game(attempts,sentences,answers,difficulty)
